@@ -1,6 +1,9 @@
 package com.techsoldev.tictactoegame.http.login;
 
 import android.os.AsyncTask;
+
+import com.techsoldev.tictactoegame.http.MyHTTPInterface;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

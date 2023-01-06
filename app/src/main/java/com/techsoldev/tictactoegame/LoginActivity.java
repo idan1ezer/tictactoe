@@ -4,7 +4,6 @@ package com.techsoldev.tictactoegame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,13 +11,14 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.gson.Gson;
 import com.techsoldev.tictactoegame.http.login.Login;
-import com.techsoldev.tictactoegame.http.login.MyHTTPInterface;
+import com.techsoldev.tictactoegame.http.MyHTTPInterface;
 
 import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
+
+    public static String GLOBAL_EMAIL;
 
     private TextInputLayout start_EDT_email;
     private TextInputLayout start_EDT_password;
@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void myMethod(boolean result) {
                     if (result == true) {
+                        GLOBAL_EMAIL = email;
                         Toast.makeText(LoginActivity.this, "Logged in successfully!", Toast.LENGTH_LONG).show();
                         finish();
                         Intent intent = new Intent(LoginActivity.this, OfflineGameMenuActivity.class);

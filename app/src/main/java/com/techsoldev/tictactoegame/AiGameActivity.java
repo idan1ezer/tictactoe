@@ -28,6 +28,8 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.techsoldev.tictactoegame.http.MyHTTPInterface;
+import com.techsoldev.tictactoegame.http.object.PostObject;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -661,8 +663,14 @@ public class AiGameActivity extends AppCompatActivity implements View.OnClickLis
         Button continueBtn = dialog.findViewById(R.id.offline_game_continue_btn);
         ImageView playerImg = dialog.findViewById(R.id.offline_game_player_img);
 
-
-
+        PostObject postObject = (PostObject) new PostObject(new MyHTTPInterface() {
+            @Override
+            public void myMethod(boolean result) {
+                if (result == true) {
+                    Toast.makeText(AiGameActivity.this, "Score has been upload!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).execute();
 
 
         Handler handler = new Handler();
