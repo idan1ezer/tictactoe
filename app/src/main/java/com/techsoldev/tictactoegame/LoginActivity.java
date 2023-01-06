@@ -1,10 +1,10 @@
 package com.techsoldev.tictactoegame;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,6 +12,11 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.gson.Gson;
+import com.techsoldev.tictactoegame.http.login.Login;
+import com.techsoldev.tictactoegame.http.login.MyHTTPInterface;
+
+import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,23 +45,37 @@ public class LoginActivity extends AppCompatActivity {
 
         start_BTN_login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { login();}
+            public void onClick(View v) {
+                try {
+                    login();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
     }
 
 
-    private void login() {
+     private void login() throws IOException {
         if (isValid()) {
+
             String email, password;
             email = start_EDT_email.getEditText().getText().toString().trim();
             password = start_EDT_password.getEditText().getText().toString().trim();
 
-            // on success:
-            finish();
-            Intent intent = new Intent(LoginActivity.this, OfflineGameMenuActivity.class);
-            startActivity(intent);
-
+            Login success = (Login) new Login(email, password, new MyHTTPInterface() {
+                @Override
+                public void myMethod(boolean result) {
+                    if (result == true) {
+                        Toast.makeText(LoginActivity.this, "Logged in successfully!", Toast.LENGTH_LONG).show();
+                        finish();
+                        Intent intent = new Intent(LoginActivity.this, OfflineGameMenuActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Email or Password are incorrect!", Toast.LENGTH_LONG).show();                    }
+                }
+            }).execute();
         }
 
         else
@@ -87,4 +106,5 @@ public class LoginActivity extends AppCompatActivity {
                 start_EDT_password
         };
     }
+
 }

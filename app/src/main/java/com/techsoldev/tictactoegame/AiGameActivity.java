@@ -645,6 +645,8 @@ public class AiGameActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+
+    // HERE TO CHANGE
     private void celebrateDialog(int player_check) {
 
 
