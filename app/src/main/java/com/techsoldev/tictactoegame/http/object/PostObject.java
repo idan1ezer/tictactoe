@@ -46,7 +46,7 @@ public class PostObject extends AsyncTask<Void, Void, Boolean> {
                     "\"active\":false," +
                     "\"createdBy\":{" +
                         "\"userId\":{" +
-                            "\"superapp\":\"2023a.roni\"," +
+                            "\"superapp\":\"2023a.roni.aronson\"," +
                             "\"email\":\"" + email + "\"" +
                         "}" +
                     "}," +

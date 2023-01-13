@@ -19,7 +19,6 @@ import java.io.IOException;
 public class LoginActivity extends AppCompatActivity {
 
     public static String GLOBAL_EMAIL;
-
     private TextInputLayout start_EDT_email;
     private TextInputLayout start_EDT_password;
     private MaterialButton start_BTN_login;
